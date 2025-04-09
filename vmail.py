@@ -8,10 +8,6 @@ from email.mime.multipart import MIMEMultipart
 from vendrareports import vlog
 import num2words as nw
 
-
-
-
-
 class C_vemail:
 
     def M_send_email(value):
