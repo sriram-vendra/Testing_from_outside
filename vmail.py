@@ -20,8 +20,6 @@ class C_vemail:
         if v['mail_send_type']!='SMTP':
             message = Mail(from_email=v['from'],to_emails=value['to'].split(','),subject=value['sub'],html_content=value['content'])
             message.cc=value['cc'].split(',') if value.get('cc') is not None else []
-            #sg = SendGridAPIClient('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')
-            #sg = SendGridAPIClient('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')
             response = sg.send(message)
             value['logger_type']='info'
             value['message']='SENDGRID mail sent successfully'
