@@ -2,7 +2,8 @@ import json
 class Templates:
     def get_template(temp_name):
         ret_value=[]
-        Template={"Purchase_order":"""<!DOCTYPE html>
+        Template={"Purchase_order":
+        """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
