@@ -5934,17 +5934,24 @@ class Templates:
             </thead>
             <tbody>
 		        {% if value['resultset_value']['bunit'] == 'BIKE' %}
-                    {%  set nctr1 = -1 %}
+                    {% set ns = namespace(nctr1=0) %}
                     {%- for i in value['resultset_value']['lineitems'] %}
-                            {% set nctr1 = nctr1 +1 %}
-                            <tr>
-                                <td>{{loop.index}}</td>
-                                <td>{{i['itemcode']}}</td>
-                                <td class="desc"><b>Model<span style="margin-left: 6mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{i['itemcodeobj']['key2']}}<br><b>Reg No<span style="margin-left: 6mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{value['resultset_value']['scannedItems'][loop.index-1]['regno']}}<br><b>Chasis Noo<span style="margin-left: 6mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{value['resultset_value']['scannedItems'][loop.index-1]['chasisno']}}<br><b>Motor No<span style="margin-left: 6mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{value['resultset_value']['scannedItems'][loop.index-1]['motorno']}}</td>
-                                <td class="rnum">{{i.qty}}</td>
-                                <td class="rnum">{{\"%.2f\"|format(i['rate'])}}</td>
-                                <td class="rnum">{{\"%.2f\"|format(i['myvalues']['MTLPRICE'])}}</td>
-                            </tr>
+                        {%- for x in value['resultset_value']['scannedItems'] %}
+                            {% if x['itemno'] == i['itemcode'] %}
+                                {% set ns.nctr1 = ns.nctr1 + 1 %}
+                                <tr style="height: 80px;">
+                                    <td>{{ ns.nctr1 }}</td>
+                                    <td>{{ i['itemcode'] }}</td>
+                                    <td class="desc"><b>Model<span style="margin-left: 11mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{i['itemcodeobj']['key2']}}<br>
+                                        <b>Reg No<span style="margin-left: 10mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{x['regno']}}<br>
+                                        <b>Chasis No<span style="margin-left: 6mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{x['chasisno']}}<br>
+                                        <b>Motor No<span style="margin-left: 6mm;"></span>:</b><span style="margin-left: 3mm;"></span></b>{{x['motorno']}}</td>
+                            {% endif %}                               
+                        {% endfor -%}
+                                    <td class="rnum">{{i.qty}}</td>
+                                    <td class="rnum">{{\"%.2f\"|format(i['rate'])}}</td>
+                                    <td class="rnum">{{\"%.2f\"|format(i['myvalues']['MTLPRICE'])}}</td>
+                                </tr>
                     {%  endfor -%}
                 {% else %}
                         {%- for i in value['resultset_value']['lineitems'] %}
@@ -6001,7 +6008,7 @@ class Templates:
                     <td><b>LC No.:</b></td>
                 </tr>
                 <tr>
-                    <td><b>D/O No.:</b></td>
+                    <td><b>D/O No.:</b> value['resultset_value']['dono'] </td>
                 </tr>
             </table>
             <table class="fcont" style="float: left; text-align: left;">
@@ -6024,7 +6031,7 @@ class Templates:
                 <br><br><br><br><br>
                 <tr>
                     <td></td>
-                    <td><b>D/O Date/Miti:</b></td>
+                    <td><b>D/O Date/Miti:</b> value['resultset_value']['dodt'] </td>
                 </tr>
             </table>
             <table class="fcont" style="float: left; text-align: left;">
