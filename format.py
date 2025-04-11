@@ -6008,7 +6008,7 @@ class Templates:
                     <td><b>LC No.:</b></td>
                 </tr>
                 <tr>
-                    <td><b>D/O No.:</b> value['resultset_value']['dono'] </td>
+                    <td><b>D/O No.:</b> {{ value['resultset_value']['dono'] }} </td>
                 </tr>
             </table>
             <table class="fcont" style="float: left; text-align: left;">
@@ -6031,7 +6031,7 @@ class Templates:
                 <br><br><br><br><br>
                 <tr>
                     <td></td>
-                    <td><b>D/O Date/Miti:</b> value['resultset_value']['dodt'] </td>
+                    <td><b>D/O Date/Miti:</b> {{ value['resultset_value']['dodt'] }} </td>
                 </tr>
             </table>
             <table class="fcont" style="float: left; text-align: left;">
